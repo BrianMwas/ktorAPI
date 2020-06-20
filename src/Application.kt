@@ -5,29 +5,32 @@ import com.ktor.api.app.about
 import com.ktor.api.app.allBlogs
 import com.ktor.api.app.home
 import com.ktor.api.model.User
-import com.ktor.api.repository.InMemoryRepository
+import com.ktor.api.repository.BlogsRepository
+import com.ktor.api.repository.DatabaseFactory
+import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.http.*
-import freemarker.cache.*
-import io.ktor.freemarker.*
 import io.ktor.http.content.*
 import io.ktor.locations.*
 import io.ktor.features.*
 import io.ktor.auth.*
 import io.ktor.gson.*
+import io.ktor.pebble.Pebble
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
-    install(FreeMarker) {
-        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
+    install(Locations) {
     }
 
-    install(Locations) {
+    install(Pebble) {
+        loader(ClasspathLoader().apply {
+            prefix = "templates"
+        })
     }
 
     install(DefaultHeaders)
@@ -68,7 +71,10 @@ fun Application.module(testing: Boolean = false) {
         gson {
         }
     }
-    val db = InMemoryRepository()
+    DatabaseFactory.init()
+
+    val db = BlogsRepository()
+
     routing {
         static("/static") {
             resources("static/ui")

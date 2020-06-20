@@ -6,7 +6,7 @@ import com.ktor.api.repository.Repository
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.authentication
-import io.ktor.freemarker.FreeMarkerContent
+import io.ktor.pebble.PebbleContent
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
@@ -22,7 +22,7 @@ fun Route.allBlogs(db: Repository) {
         get(BLOGS) {
             val user = call.authentication.principal as User
             val blogs = db.blogs()
-            call.respond(FreeMarkerContent("blogs.ftl", mapOf("blogs" to blogs, "displayName" to user.displayName)))
+            call.respond(PebbleContent("blog.html", mapOf("blogs" to blogs, "displayName" to user.displayName)))
         }
 
         post(BLOGS) {
@@ -31,7 +31,7 @@ fun Route.allBlogs(db: Repository) {
             val blogSummary = params["summary"] ?: throw  IllegalArgumentException("Missing blog summary")
             val blogContent = params["content"] ?: throw  IllegalArgumentException("Missing blog content")
 
-            db.add(Blog(blogTitle, blogSummary, blogContent))
+            db.add(blogTitle, blogSummary, blogContent)
             call.respondRedirect(BLOGS)
         }
     }

@@ -18,7 +18,7 @@ fun Route.blogs(db: Repository) {
     authenticate("auth") {
         post(BLOGS_END_POINT) {
             val request = call.receive<Request>()
-            val blog = db.add(Blog(request.title, request.summary, request.content))
+            val blog = db.add(request.title, request.summary, request.content)
             call.respond(HttpStatusCode.OK, blog)
         }
     }

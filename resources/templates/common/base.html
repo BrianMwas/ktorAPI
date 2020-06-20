@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Blog Api {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/uikit.min.css" />
+    <script src="/static/uikit.min.js"></script>
+    <script src="/static/uikit-icons.min.js"></script>
+</head>
+<body>
+    {% include "common/nav.html" %}
+    <div uk-height-viewport="expand: true">
+        <div>
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <footer>
+        <div class="uk-width-4-4">
+            <div class="uk-card uk-card-default uk-card-body">
+                {% block footer %} <p>Footer</p> {% endblock %}
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

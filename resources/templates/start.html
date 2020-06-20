@@ -1,0 +1,34 @@
+{% extends "common/base.html" %}
+
+{% block title %}Start{% endblock %}
+
+{% block content %}
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: push">
+
+    <ul class="uk-slideshow-items">
+        <li>
+            <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                <img src="https://source.unsplash.com/weekly?night" alt="" uk-cover>
+            </div>
+            <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; backgroundColor: #000,#000"></div>
+            <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                <h3 class="uk-margin-remove">{{ title }}</h3>
+                <p class="uk-margin-remove">{{ message }}</p>
+            </div>
+        </li>
+        <li>
+            <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                <img src="https://source.unsplash.com/random?stars" alt="" uk-cover>
+            </div>
+            <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; backgroundColor: #000,#000"></div>
+            <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                <h3 class="uk-margin-remove">{{ titleTwo }}</h3>
+                <p class="uk-margin-remove">{{ messageTwo }}</p>
+            </div>
+        </li>
+    </ul>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+</div>
+{% endblock %}
