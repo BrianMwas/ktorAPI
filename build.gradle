@@ -48,3 +48,5 @@ dependencies {
     compile 'com.zaxxer:HikariCP:3.4.2'
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
+
+task stage(dependsOn: ['installDist'])
