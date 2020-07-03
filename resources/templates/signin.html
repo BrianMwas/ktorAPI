@@ -1,0 +1,31 @@
+{% extends "common/base.html" %}
+
+{% block title %} Sign In {% endblock %}
+
+{% block content %}
+<div class="uk-flex uk-flex-center">
+    <div class="uk-card uk-card-default uk-width-1-2@m uk-margin-top uk-card-body" >
+        <form method="post" action="/signin">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Sign In</legend>
+                {% if error %}
+                    <div uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <h3>Notice</h3>
+                        <p>{{ error }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Username" name="username" required>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input" type="password" placeholder="Password" name="Password" required>
+                </div>
+                <button class="uk-button" type="submit">Sign in</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

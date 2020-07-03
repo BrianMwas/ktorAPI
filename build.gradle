@@ -44,6 +44,7 @@ dependencies {
     compile "org.jetbrains.exposed:exposed-core:$exposed_version"
     compile "org.jetbrains.exposed:exposed-jdbc:$exposed_version"
     compile "com.h2database:h2:$h2_version"
+    compile "org.postgresql:postgresql:$postgres_version"
     compile 'com.zaxxer:HikariCP:3.4.2'
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }

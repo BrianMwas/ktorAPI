@@ -15,12 +15,10 @@ import io.ktor.routing.post
 const val BLOGS_END_POINT = "${API_VERSION}/blogs"
 
 fun Route.blogs(db: Repository) {
-    authenticate("auth") {
+
         post(BLOGS_END_POINT) {
             val request = call.receive<Request>()
-            val blog = db.add(request.title, request.summary, request.content)
+            val blog = db.add("", request.title, request.summary, request.content)
             call.respond(HttpStatusCode.OK, blog)
         }
-    }
-
 }

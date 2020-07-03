@@ -1,6 +1,8 @@
 package com.ktor.api.repository
 
 import com.ktor.api.model.Blogs
+import com.ktor.api.model.User
+import com.ktor.api.model.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -17,17 +19,14 @@ object DatabaseFactory {
 
         transaction {
             SchemaUtils.create(Blogs)
-            Blogs.insert {
-                it[title] = "Blog title"
-                it[summary] = "Blog summary"
-                it[content] = "blog content"
-            }
+            SchemaUtils.create(Users)
         }
     }
     private fun hikari() : HikariDataSource {
         val config = HikariConfig()
-        config.driverClassName = "org.h2.Driver"
-        config.jdbcUrl = "jdbc:h2:mem:test"
+        config.driverClassName = "org.postgresql.Driver"
+        config.jdbcUrl = System.getenv("JDBC_DATABASE_URL")
+        config.password = System.getenv("JDBC_DATABASE_PWD")
         config.maximumPoolSize = 3
         config.isAutoCommit = false
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"

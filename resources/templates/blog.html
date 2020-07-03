@@ -1,36 +1,50 @@
 {% extends "common/base.html" %}
 
-{% block title %} Create {{ displayName }} {% endblock %}
+{% block title %} Let's Create | {{ displayName }} {% endblock %}
 
 {% block content %}
     <div class="uk-container">
         <div class="uk-padding">
-
-                <form method="post" action="/all-blogs">
-                    <fieldset class="uk-fieldset">
-                        <legend class="uk-legend">Add new Blog</legend>
-                        <div class="uk-margin">
-                            <input class="uk-input" name="title" type="text" placeholder="Blog Content">
-                        </div>
-                        <div class="uk-margin">
-                            <input class="uk-input" name="summary" type="text" placeholder="Summary">
-                        </div>
-                        <div class="uk-margin">
-                            <textarea class="uk-textarea" rows="5" name="content" placeholder="Blog content"></textarea>
-                        </div>
-                        <button type="submit" class="uk-button uk-button-primary">Submit</button>
-                    </fieldset>
-
-                </form>
-                <div class="uk-margin-top">
-                    {% for blog in blogs %}
-                        <div class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-bottom">
-                            <h3 class="uk-card-title">{{ blog.title }}</h3>
-                            <h5 class="uk-text-meta uk-margin-remove-top">{{ blog.summary }}</h5>
-                            <p>{{ blog.content }}</p>
-                        </div>
-                    {% endfor %}
+    <div class="uk-flex">
+        <form class="uk-width-1-2" method="post" action="/all-blogs">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Add new Blog</legend>
+                <input type="hidden" name="date" value="{{ date }}">
+                <input type="hidden" name="code" value="{{ code }}">
+                <input type="hidden" name="action" value="add">
+                <div class="uk-margin">
+                    <input class="uk-input" name="title" type="text" placeholder="Blog Content">
                 </div>
+                <div class="uk-margin">
+                    <input class="uk-input" name="summary" type="text" placeholder="Summary">
+                </div>
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" rows="5" name="content" placeholder="Blog content"></textarea>
+                </div>
+                <button type="submit" class="uk-button uk-button-primary">Submit</button>
+            </fieldset>
+
+        </form>
+        <div class="uk-margin-top uk-margin-left uk-width-1-2">
+            {% for blog in blogs %}
+                <div class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-bottom">
+                    <form method="post" action="/all-blogs">
+                        <input type="hidden" name="date" value="${date?c}">
+                        <input type="hidden" name="code" value="${code}">
+                        <input type="hidden" name="id" value="${phrase.id}">
+                        <input type="hidden" name="action" value="delete">
+                        <span class="uk-margin-small-right" uk-icon="trash"></span>
+                    </form>
+
+                    <h3 class="uk-card-title">{{ blog.title }}</h3>
+                    <h5 class="uk-text-meta uk-margin-remove-top">{{ blog.summary }}</h5>
+                    <p>{{ blog.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
         </div>
     </div>
 {% endblock %}

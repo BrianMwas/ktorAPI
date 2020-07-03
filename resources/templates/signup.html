@@ -1,0 +1,40 @@
+{% extends "common/base.html" %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="uk-margin">
+            <div class="uk-flex uk-flex-center">
+            <div class="uk-card uk-card-default uk-width-1-2@m uk-margin-top uk-card-body">
+                {% if error %}
+                    <div class="uk-alert-warning" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>{{ error }}</p>
+                    </div>
+                {% endif %}
+                <form action="/auth/signup" method="POST">
+
+                    <fieldset class="uk-fieldset">
+                        <legend class="uk-legend">Sign Up for an account</legend>
+                        <div class="uk-margin">
+                            <input class="uk-input " type="text" placeholder="Username" name="username" required>
+                        </div>
+                        <div class="uk-margin">
+                            <input class="uk-input" type="email" placeholder="your@email.com" name="email" required>
+                        </div>
+                        <div class="uk-margin">
+                            <input class="uk-input " type="text" placeholder="Your user account name" name="displayName" required>
+                        </div>
+                        <div class="uk-margin">
+                            <input class="uk-input " type="password" placeholder="Password" name="password" required>
+                        </div>
+                        <button class="uk-button" type="submit">Sign Up</button>
+                    </fieldset>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
